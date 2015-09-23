@@ -37,7 +37,9 @@ namespace UMSAgent
             AllDATA,//4
             ERRORDATA,//5
             PAGEINFODATA,//6
-            TAGDATA//7
+            TAGDATA,//7
+            USERID,//8
+            PUSHID//9
         };
         public static bool isValidKey= false;
       
@@ -80,6 +82,8 @@ namespace UMSAgent
             settings.Add("UserIdentifier", userid);
             
             settings.Save();
+            //post userid
+            postUserid(userid);
         }
 
         //post clientdata and all data
@@ -232,11 +236,23 @@ namespace UMSAgent
             }
         }
 
+       
+
 
         //post tag
         public static void postTag(string tag)
         {
             manager.tagDataProceed(tag);
+        }
+        //post userid
+        private static void postUserid(string userid)
+        {
+            manager.useridDataProceed(userid);
+        }
+        //post pushrid
+        public static void postPushid(string userid)
+        {
+            manager.pushidDataProceed(userid);
         }
 
         

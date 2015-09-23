@@ -82,11 +82,14 @@ namespace UmsTest
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
             UMSAgent.UMSApi.setDebugMode(true);
-            UMSAgent.UMSApi.onAppStart("5ef319f926726cdca01d381f6c80a03d", "http://192.168.1.4/webtest/index.php");
-            UMSAgent.UMSApi.bindUserIdentifier("woyear");
+            UMSAgent.UMSApi.onAppStart("764e13028e5aff42ed449243ba2dcfd0", "http://demo.cobub.com/razor/index.php");
+            UMSAgent.UMSApi.bindUserIdentifier("user Id");
+            UMSAgent.UMSApi.postPushid("push id");
             UMSAgent.UMSApi.postClientdata();
             UMSAgent.UMSApi.updateOnlineConfig();
             UMSAgent.UMSApi.getNewVersion();
+            
+            UMSAgent.UMSApi.onEvent("login","MainPage");
         }
        
         
@@ -107,6 +110,7 @@ namespace UmsTest
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
+           // UMSAgent.UMSApi.onEvent("quit", "MainPage");
         }
 
         // Code to execute if a navigation fails
@@ -124,8 +128,13 @@ namespace UmsTest
         {
             if (System.Diagnostics.Debugger.IsAttached)
             {
+                
                 // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
+                
+               System.Diagnostics.Debug.WriteLine(e.ExceptionObject.StackTrace);
+                
+               // System.Diagnostics.Debugger.Break();
+              
             }
 
         }

@@ -78,6 +78,24 @@ namespace UMSAgent.CallBcak
 
         }
 
+        //callback of userid data
+
+        public static void call_back_process_useriddata(string msg, object obj)
+        {
+            DebugTool.Log("call back of userid data------" + msg);
+            CommonRet o = getJsonObj(msg);
+
+        }
+
+        //callback of push data
+
+        public static void call_back_process_pushiddata(string msg, object obj)
+        {
+            DebugTool.Log("call back of pushid data------" + msg);
+            CommonRet o = getJsonObj(msg);
+
+        }
+
         //callback of event data
         public static void call_back_process_eventdata(string msg, object obj)
         {
@@ -94,7 +112,7 @@ namespace UMSAgent.CallBcak
         //callback of page visit
         public static void call_back_process_pageinfodata(string msg, object obj)
         {
-           // DebugTool.Log("call back of page info data------" + msg);
+            DebugTool.Log("call back of page info data------" + msg);
             CommonRet o = (CommonRet)getJsonObj(msg);
             if (o == null || !o.flag.Equals("1"))
             {
@@ -211,7 +229,7 @@ namespace UMSAgent.CallBcak
                
             }
 
-            DebugTool.Log("call back of check version------" + msg);
+            DebugTool.Log("call back of check app version------" + msg);
 
         }
 

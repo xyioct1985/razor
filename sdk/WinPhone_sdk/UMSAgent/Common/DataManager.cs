@@ -157,10 +157,19 @@ namespace UMSAgent.Common
 
             if (settings["repolicy"].Equals("1") && Utility.isNetWorkConnected())
             {
-                Post post = new Post((int)UMSAgent.UMSApi.DataType.PAGEINFODATA, obj);
-                post.stateChanged += new Post.stateChangedHandler(this.getData);
-                
-                post.sendData(model.getUrl((int)UMSAgent.UMSApi.DataType.PAGEINFODATA));
+                try
+                {
+                    Post post = new Post((int)UMSAgent.UMSApi.DataType.PAGEINFODATA, obj);
+                    post.stateChanged += new Post.stateChangedHandler(this.getData);
+
+                    post.sendData(model.getUrl((int)UMSAgent.UMSApi.DataType.PAGEINFODATA));
+
+                }
+                catch (Exception e)
+                { 
+                 
+                }
+               
             }
             else
             {
@@ -184,6 +193,26 @@ namespace UMSAgent.Common
                 FileSave.saveFile((int)UMSAgent.UMSApi.DataType.TAGDATA, obj);
             }
         
+        }
+
+        //userid data proceed
+        public void useridDataProceed(string userid)
+        {
+            Userid obj = model.getUseridData(userid);
+            Post post = new Post((int)UMSAgent.UMSApi.DataType.USERID, obj);
+            post.stateChanged += new Post.stateChangedHandler(this.getData);
+            post.sendData(model.getUrl((int)UMSAgent.UMSApi.DataType.USERID));
+
+        }
+
+        //pushid data proceed
+        public void pushidDataProceed(string pushid)
+        {
+            Pushid obj = model.getPushidData(pushid);
+            Post post = new Post((int)UMSAgent.UMSApi.DataType.PUSHID, obj);
+            post.stateChanged += new Post.stateChangedHandler(this.getData);
+            post.sendData(model.getUrl((int)UMSAgent.UMSApi.DataType.PUSHID));
+
         }
 
         //get data from server 
@@ -224,6 +253,14 @@ namespace UMSAgent.Common
             if (type == (int)UMSApi.DataType.TAGDATA)
             {
                 AsyncCallBackPro.call_back_process_tagdata(s, obj);
+            }
+            if (type == (int)UMSApi.DataType.USERID)
+            {
+                AsyncCallBackPro.call_back_process_useriddata(s, obj);
+            }
+            if (type == (int)UMSApi.DataType.PUSHID)
+            {
+                AsyncCallBackPro.call_back_process_pushiddata(s, obj);
             }
                 
         }

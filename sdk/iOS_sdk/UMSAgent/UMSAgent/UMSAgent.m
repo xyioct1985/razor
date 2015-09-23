@@ -398,7 +398,7 @@
         [errorLogArray addObject:errorLog];
         if(isLogEnabled)
         {
-            NSLog(@"Error Log array size = %d",[errorLogArray count]);
+            NSLog(@"Error Log array size = %lu",(unsigned long)[errorLogArray count]);
         }
         NSData *newErrorData = [NSKeyedArchiver archivedDataWithRootObject:errorLogArray];
         [[NSUserDefaults standardUserDefaults] setObject:newErrorData forKey:@"errorLog"];
@@ -450,7 +450,7 @@
         [activityLogArray addObject:acLog];
         if(isLogEnabled)
         {
-            NSLog(@"Activity Log array size = %d",[activityLogArray count]);
+            NSLog(@"Activity Log array size = %@",@([activityLogArray count]));
         }
         NSData *newActivityData = [NSKeyedArchiver archivedDataWithRootObject:activityLogArray];
         [[NSUserDefaults standardUserDefaults] setObject:newActivityData forKey:@"activityLog"];
@@ -524,59 +524,17 @@
 
 +(void)postEvent:(NSString *)event_id
 {
-    Event *event =[[Event alloc] init];
-    event.event_id = event_id;
-    event.activity = [[NSBundle mainBundle] bundleIdentifier];
-    event.label = @"";
-    event.time = [[UMSAgent getInstance] getCurrentTime];
-    event.version = [[UMSAgent getInstance] getVersion];
-    event.acc = 1;
-    event.json = @"";
-    [[UMSAgent getInstance] archiveEvent:event];
-}
-
-+(void)postEventJSON:(NSString*)event_id json:(NSString*)jsonStr
-{
-    Event *event =[[Event alloc] init];
-    event.event_id = event_id;
-    event.activity = [[NSBundle mainBundle] bundleIdentifier];
-    event.label = @"";
-    event.time = [[UMSAgent getInstance] getCurrentTime];
-    event.version = [[UMSAgent getInstance] getVersion];
-    NSString *jsonN = [jsonStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSLog(@"EVNT=%@",jsonN);
-    
-    event.json = jsonN;
-    event.acc = 1;
-    [[UMSAgent getInstance] archiveEvent:event];
+    [UMSAgent postEvent:event_id label:@"" acc:1];
 }
 
 +(void)postEvent:(NSString *)event_id label:(NSString *)label
 {
-    Event *event = [[Event alloc] init];
-    event.event_id = event_id;
-    event.time = [[UMSAgent getInstance] getCurrentTime];
-    event.acc = 1;
-    event.version = [[UMSAgent getInstance] getVersion];
-    event.activity = [[NSBundle mainBundle] bundleIdentifier];
-    event.json = @"";
-    event.label = label;
-    [[UMSAgent getInstance] archiveEvent:event];
-    
+    [UMSAgent postEvent:event_id label:label acc:1];
 }
 
 +(void)postEvent:(NSString *)event_id acc:(NSInteger)acc
 {
-    Event *event = [[Event alloc] init];
-    event.event_id = event_id;
-    event.time = [[UMSAgent getInstance] getCurrentTime];
-    event.acc = acc;
-    event.json = @"";
-    event.version = [[UMSAgent getInstance] getVersion];
-    event.activity =[[NSBundle mainBundle] bundleIdentifier];
-    event.label = @"";
-    [[UMSAgent getInstance] archiveEvent:event];
-    
+    [UMSAgent postEvent:event_id label:@"" acc:acc];
 }
 
 +(void)postEvent:(NSString *)event_id label:(NSString *)label acc:(NSInteger)acc
@@ -585,7 +543,6 @@
     event.event_id = event_id;
     event.time = [[UMSAgent getInstance] getCurrentTime];
     event.acc = acc;
-    event.json = @"";
     event.activity = [[NSBundle mainBundle] bundleIdentifier];
     event.version = [[UMSAgent getInstance] getVersion];
     event.label = label;
@@ -596,17 +553,18 @@
 {
     Tag *tags = [[Tag alloc] init];
     tags.tags = tag;
-    tags.productkey = [[UMSAgent getInstance] appKey];
+    tags.appkey = [[UMSAgent getInstance] appKey];
     tags.deviceid = [UMS_OpenUDID value];
 
 
     [[UMSAgent getInstance] archiveTag:tags];
 }
 
-+(void)bindUserIdentifier:(NSString *)userid
++(void)bindUserid:(NSString *)userid
 {
     [[NSUserDefaults standardUserDefaults] setObject:userid forKey:@"userid"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    [[UMSAgent getInstance] postUserIdentifier:userid];
 }
 
 +(NSString*)getUserId
@@ -693,7 +651,7 @@
     NSMutableArray * array = nil;
     if(isLogEnabled)
     {
-        NSLog(@"old  data num = %d",[array count]);
+        NSLog(@"old  data num = %lu",(unsigned long)[array count]);
     }
     
     if (oldData!=nil)
@@ -710,7 +668,7 @@
             [requestDictionary setObject:mEvent.time forKey:@"time"];
             [requestDictionary setObject:mEvent.activity forKey:@"activity"];
             [requestDictionary setObject:mEvent.label forKey:@"label"];
-            [requestDictionary setObject:[NSNumber numberWithInt:mEvent.acc] forKey:@"acc"];
+            [requestDictionary setObject:[NSNumber numberWithInteger:mEvent.acc] forKey:@"acc"];
             [requestDictionary setObject:appKey forKey:@"appkey"];
             [requestDictionary setObject:mEvent.version forKey:@"version"];
             [eventArray addObject:requestDictionary];
@@ -725,7 +683,7 @@
     NSMutableArray * array = nil;
     if(isLogEnabled)
     {
-        NSLog(@"old  data num = %d",[array count]);
+        NSLog(@"old  data num = %lu",(unsigned long)[array count]);
     }
     
     if (oldData!=nil)
@@ -740,7 +698,7 @@
             NSMutableDictionary *requestDictionary = [[NSMutableDictionary alloc] init];
             [requestDictionary setObject:mTag.deviceid forKey:@"deviceid"];
             [requestDictionary setObject:mTag.tags forKey:@"tags"];
-            [requestDictionary setObject:mTag.productkey forKey:@"productkey"];
+            [requestDictionary setObject:mTag.appkey forKey:@"appkey"];
             [tagArray addObject:requestDictionary];
         }
     }
@@ -757,7 +715,7 @@
         array = [NSKeyedUnarchiver unarchiveObjectWithData:oldData];
         if(isLogEnabled)
         {
-            NSLog(@"Have activity data num = %d",[array count]);
+            NSLog(@"Have activity data num = %lu",(unsigned long)[array count]);
         }
     }
     NSMutableArray *activityLogArray = [[NSMutableArray alloc] init];
@@ -797,7 +755,7 @@
         array = [NSKeyedUnarchiver unarchiveObjectWithData:oldData];
         if(isLogEnabled)
         {
-            NSLog(@"Have error data num = %d",[array count]);
+            NSLog(@"Have error data num = %lu",(unsigned long)[array count]);
         }
     }
     NSMutableArray *errorLogArray = [[NSMutableArray alloc] init];
@@ -910,7 +868,7 @@
         [mClientDataArray addObject:clientData];
         if(isLogEnabled)
         {
-            NSLog(@"Archived client data = %d",[mClientDataArray count]);
+            NSLog(@"Archived client data = %lu",(unsigned long)[mClientDataArray count]);
         }
         NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:mClientDataArray];
         [[NSUserDefaults standardUserDefaults] setObject:newData forKey:@"clientDataArray"];
@@ -932,14 +890,14 @@
     [self performSelector:@selector(postClientDataInBackground:) withObject:clientData];
 }
 
-+(void)postCID:(NSString*)clientID
++(void)postPushid:(NSString*)pushid
 {
-    [self performSelector:@selector(postCIDInBackground:) withObject:clientID];
+    [[UMSAgent getInstance] performSelector:@selector(postPushidInBackground:) withObject:pushid];
 }
 
-+(void)postUserIdentifier:(NSString*)userId
+-(void)postUserIdentifier:(NSString*)userId
 {
-    [self performSelector:@selector(postUserIdentifierInBackground:) withObject:userId];
+    [[UMSAgent getInstance] performSelector:@selector(postUserIdentifierInBackground:) withObject:userId];
 }
 
 -(NSMutableArray *)getArchiveClientData
@@ -951,7 +909,7 @@
         array = [NSKeyedUnarchiver unarchiveObjectWithData:oldData];
         if(isLogEnabled)
         {
-            NSLog(@"Have error data num = %d",[array count]);
+            NSLog(@"Have error data num = %lu",(unsigned long)[array count]);
         }
     }
     NSMutableArray *clientDataArray = [[NSMutableArray alloc] init];
@@ -1022,7 +980,7 @@
         [mEventArray addObject:event];
         if(isLogEnabled)
         {
-            NSLog(@"Archived event count = %d",[mEventArray count]);
+            NSLog(@"Archived event count = %lu",(unsigned long)[mEventArray count]);
         }
         NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:mEventArray];
         [[NSUserDefaults standardUserDefaults] setObject:newData forKey:@"eventArray"];
@@ -1054,7 +1012,7 @@
         [mTagArray addObject:tag];
         if(isLogEnabled)
         {
-            NSLog(@"Archived tag count = %d",[mTagArray count]);
+            NSLog(@"Archived tag count = %@",@([mTagArray count]));
         }
         NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:mTagArray];
         [[NSUserDefaults standardUserDefaults] setObject:newData forKey:@"tagArray"];
@@ -1080,7 +1038,7 @@
     info.modulename = [[UIDevice currentDevice] model];
     info.os_version = [[UIDevice currentDevice] systemVersion];
     info.time = [self getCurrentTime];
-    if([UMSAgent isJailbroken])
+    if([self isJailbroken])
     {
         info.isjailbroken = @"1";
     }
@@ -1146,7 +1104,7 @@
     
 }
 
--(void)postCIDInBackground:(NSString*)clientID
+-(void)postPushidInBackground:(NSString*)clientID
 {
      @autoreleasepool {
          CommonReturn *ret ;
@@ -1172,7 +1130,7 @@
 -(void)postUserIdentifierInBackground:(NSString*)userId
 {
     @autoreleasepool {
-        [UMSAgent bindUserIdentifier:userId];
+        //[UMSAgent bindUserIdentifier:userId];
         CommonReturn *ret ;
         ret = [PostClientDataDao postUserIdentifier:self.appKey userId:userId];
 
@@ -1237,7 +1195,7 @@
             [mClientDataArray addObject:clientData];
             if(isLogEnabled)
             {
-                NSLog(@"Archived client data = %d",[mClientDataArray count] );
+                NSLog(@"Archived client data = %@",@([mClientDataArray count]));
             }
             NSData *newData = [NSKeyedArchiver archivedDataWithRootObject:mClientDataArray];
             [[NSUserDefaults standardUserDefaults] setObject:newData forKey:@"clientDataArray"];
@@ -1320,7 +1278,7 @@ uncaughtExceptionHandler(NSException *exception) {
     aslresponse_free(r);
 }
 
-+(BOOL)isJailbroken
+-(BOOL)isJailbroken
 {
     BOOL jailbroken = NO;
     NSString *cydiaPath = @"/Applications/Cydia.app";

@@ -33,17 +33,15 @@ typedef enum {
 ;
 +(void)postEvent:(NSString *)event_id;
 
-//+(void)postEvent:(NSString *)event_id label:(NSString *)label;
++(void)postEvent:(NSString *)event_id label:(NSString *)label;
 
 +(void)postEvent:(NSString *)event_id acc:(NSInteger)acc;
 
-//+(void)postEvent:(NSString *)event_id label:(NSString *)label acc:(NSInteger)acc;
-
-//+(void)postEventJSON:(NSString*)event_id json:(NSString*)jsonStr;
++(void)postEvent:(NSString *)event_id label:(NSString *)label acc:(NSInteger)acc;
 
 +(void)postTag:(NSString *)tag;
 
-+(void)bindUserIdentifier:(NSString *)userid;
++(void)bindUserid:(NSString *)userid;
 
 +(void)startTracPage:(NSString*)page_name;
 
@@ -51,15 +49,10 @@ typedef enum {
 
 +(void)tracePage:(NSString*)page_name;
 
-+(void)postCID:(NSString*)clientID;
++(void)postPushid:(NSString*)pushid;
 
-+(void)postUserIdentifier:(NSString*)userId;
-
-// Check if the device jail broken
-+ (BOOL)isJailbroken;
 + (void)setOnLineConfig:(BOOL)isOnlineConfig;
 + (void)setIsLogEnabled:(BOOL)isLogEnabled;
 + (NSString*)getUMSUDID;
 +(NSString*)getUserId;
-
 @end

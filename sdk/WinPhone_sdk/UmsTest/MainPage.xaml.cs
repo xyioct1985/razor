@@ -36,11 +36,7 @@ namespace UmsTest
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            UMSAgent.UMSApi.onEvent("mycontact", "中文测试");
-           // UMSAgent.UMSApi.postTag("有志青年");
-        }
+       
 
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -54,6 +50,14 @@ namespace UmsTest
             UMSAgent.UMSApi.onPageBegin("main page");
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            UMSAgent.UMSApi.onEvent("click", "Mainpage");
+           
+        }
+
+
+        //仅仅跳转，不上传数据。
         private void button2_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Page2.xaml", UriKind.Relative));
@@ -68,12 +72,13 @@ namespace UmsTest
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            UMSAgent.UMSApi.onEvent("mycontact", "MainPage", "some lable");
+            UMSAgent.UMSApi.onEvent("click", "MainPage", "my lable");
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
-            UMSAgent.UMSApi.onEvent("mycontact", "MainPage", "acc label", 10);
+            UMSAgent.UMSApi.onEvent("click", "MainPage", 10);
+           
         }
 
         private void button6_Click(object sender, RoutedEventArgs e)
@@ -95,6 +100,11 @@ namespace UmsTest
         private void button7_Click(object sender, RoutedEventArgs e)
         {
             UMSAgent.UMSApi.postTag("购物达人");
+        }
+
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            UMSAgent.UMSApi.onEvent("click", "MainPage", "acc label", 7);
         }
 
 

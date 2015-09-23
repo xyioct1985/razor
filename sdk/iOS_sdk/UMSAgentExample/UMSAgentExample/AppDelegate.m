@@ -23,13 +23,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [UMSAgent bindUserIdentifier:@"wbtech"];
-
-    [UMSAgent startWithAppKey:@"0d48b7f9372f551150c36e524421ac9b"
+    [UMSAgent startWithAppKey:@"6dacad660216970bef0301756c870a27"
                  ReportPolicy:REALTIME
-                    ServerURL:@"http://192.168.199.211/opencobub/web/index.php?"];
-
+                    ServerURL:@"http://demo.cobub.com/razor/index.php?"];
+       [UMSAgent bindUserid:@"wbtech"];
+    [UMSAgent checkUpdate];
     [UMSAgent setIsLogEnabled:YES];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
