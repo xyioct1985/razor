@@ -16,6 +16,7 @@
 #import "Global.h"
 #import "NSDictionary_JSONExtensions.h"
 #import "network.h"
+#import "UMSAgent.h"
 
 @implementation postEventDao
 
@@ -29,7 +30,10 @@
     [requestDictionary setObject:mEvent.time forKey:@"time"];
     [requestDictionary setObject:mEvent.activity forKey:@"activity"];
     [requestDictionary setObject:mEvent.label forKey:@"label"];
+    [requestDictionary setObject:mEvent.json forKey:@"attachment"];
     [requestDictionary setObject:mEvent.version forKey:@"version"];
+    [requestDictionary setObject:[UMSAgent getUserId] forKey:@"userid"];
+    [requestDictionary setObject:[UMSAgent getUMSUDID] forKey:@"deviceid"];
     [requestDictionary setObject:[NSNumber numberWithInt:mEvent.acc] forKey:@"acc"];
     [requestDictionary setObject:appkey forKey:@"appkey"];
     

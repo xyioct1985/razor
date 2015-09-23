@@ -23,7 +23,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [UMSAgent checkUpdate];
+//    [UMSAgent checkUpdate];
 }
 
 - (void)throwNSException
@@ -32,37 +32,41 @@
     @throw e;
 } 
 
--(IBAction) login
+-(IBAction) crash
 {
-    [UMSAgent postEvent:@"login" label:@"Login" acc:666];
     [self throwNSException];
 }
 
 -(IBAction) register
 {
-    [UMSAgent postEvent:@"register" label:@"Login" acc:888];
+    [UMSAgent postEvent:@"login"  acc:1];
+	[UMSAgent postEvent:@"click" acc:1];
+    [UMSAgent postEvent:@"quit" acc:1];
 }
 
 
 -(IBAction) goToSecondView
 {
     SecondViewController *secondViewController = [[SecondViewController alloc] init];
-    [self presentModalViewController:secondViewController animated:YES];
+
+    [self presentViewController:secondViewController animated:YES completion:nil];
 }
 
 -(IBAction) tag
 {
-    [UMSAgent postTag:@"ios tag"];
+//    [UMSAgent postTag:@"ios tag"];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [UMSAgent startTracPage:@"LoginActivity"];
+    [super viewWillAppear:YES];
+    [UMSAgent tracePage:@"Login"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [UMSAgent endTracPage:@"LoginActivity"];
+    [super viewWillDisappear:YES];
+//    [UMSAgent endTracPage:@"LoginActivity"];
 }
 
 - (void)viewDidUnload	

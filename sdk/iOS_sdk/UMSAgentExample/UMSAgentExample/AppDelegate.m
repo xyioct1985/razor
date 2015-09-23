@@ -25,9 +25,10 @@
 {
     [UMSAgent bindUserIdentifier:@"wbtech"];
 
-    [UMSAgent startWithAppKey:@"2f5aa53b5ae03307274b596bbbeaa9ff" ReportPolicy:REALTIME ServerURL:@"http://192.168.1.104:8877/rcobub/index.php?"];
-    
-    
+    [UMSAgent startWithAppKey:@"0d48b7f9372f551150c36e524421ac9b"
+                 ReportPolicy:REALTIME
+                    ServerURL:@"http://192.168.199.211/opencobub/web/index.php?"];
+
     [UMSAgent setIsLogEnabled:YES];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -35,9 +36,27 @@
     self.viewController = [[ViewController alloc] initWithNibName:@"ViewController" bundle:nil];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
+
+//- (void)registerRemoteNotification
+//{
+//	UIRemoteNotificationType apn_type = (UIRemoteNotificationType)(UIRemoteNotificationTypeAlert|UIRemoteNotificationTypeSound|UIRemoteNotificationTypeBadge);
+//	[[UIApplication sharedApplication] registerForRemoteNotificationTypes:apn_type];
+//}
+
+
+//- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
+//{
+//    NSString *token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+////	NSString *devToken = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+////    NSLog(@"deviceToken:%@", _deviceToken);
+//    
+//
+////    }
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

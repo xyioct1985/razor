@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `umsinstall_channel_product` (
 
 CREATE TABLE IF NOT EXISTS `umsinstall_ci_sessions` (
   `session_id` varchar(40) COLLATE utf8_bin NOT NULL DEFAULT '0',
-  `ip_address` varchar(16) COLLATE utf8_bin NOT NULL DEFAULT '0',
+  `ip_address` varchar(45) COLLATE utf8_bin NOT NULL DEFAULT '0',
   `user_agent` varchar(150) COLLATE utf8_bin NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
   `user_data` text COLLATE utf8_bin NOT NULL,
@@ -128,6 +128,7 @@ CREATE TABLE IF NOT EXISTS `umsinstall_clientdata` (
   `modulename` varchar(50) DEFAULT NULL,
   `imei` varchar(50) DEFAULT NULL,
   `imsi` varchar(50) DEFAULT NULL,
+  `salt` varchar(64) DEFAULT NULL,
   `havegps` varchar(50) DEFAULT NULL,
   `havebt` varchar(50) DEFAULT NULL,
   `havewifi` varchar(50) DEFAULT NULL,
@@ -149,7 +150,8 @@ CREATE TABLE IF NOT EXISTS `umsinstall_clientdata` (
   `isjailbroken` int(10) NOT NULL DEFAULT '0',
   `insertdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `useridentifier` varchar(256) default NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `insertdate` (`insertdate`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -168,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `umsinstall_clientusinglog` (
   `appkey` varchar(500) NOT NULL,
   `version` varchar(50) NOT NULL,
   `insertdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `insertdate` (`insertdate`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -205,7 +208,8 @@ CREATE TABLE IF NOT EXISTS `umsinstall_errorlog` (
   `version` varchar(50) NOT NULL,
   `isfix` int(11) DEFAULT NULL,
   `insertdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `insertdate` (`insertdate`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -226,7 +230,8 @@ CREATE TABLE IF NOT EXISTS `umsinstall_eventdata` (
   `event_id` int(50) NOT NULL,
   `version` varchar(50) NOT NULL,
   `insertdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `insertdate` (`insertdate`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1;
 
 -- --------------------------------------------------------
@@ -795,6 +800,6 @@ CREATE TABLE IF NOT EXISTS `umsinstall_device_tag` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `deviceid` varchar(256) NOT NULL,
     `tags` varchar(1024) default NULL,
-    `productkey` varchar(64) NOT NULL,
+    `appkey` varchar(64) NOT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

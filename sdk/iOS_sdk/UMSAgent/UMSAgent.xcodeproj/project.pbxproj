@@ -390,7 +390,7 @@
 			name = UMSAgentTests;
 			productName = UMSAgentTests;
 			productReference = 3630006815131A1600E84C2D /* UMSAgentTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -555,6 +555,7 @@
 				DSTROOT = /tmp/UMSAgent.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UMSAgent/UMSAgent-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -569,6 +570,7 @@
 				DSTROOT = /tmp/UMSAgent.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "UMSAgent/UMSAgent-Prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -27,17 +27,19 @@ typedef enum {
 
 +(void)checkUpdate;
 
-+(void)startWithAppKey:(NSString*)appKey serverURL:(NSString *)serverURL;
++(void)startWithAppKey:(NSString*)appKey ServerURL:(NSString *)serverURL;
 
 +(void)startWithAppKey:(NSString*)appKey ReportPolicy:(ReportPolicy)policy ServerURL:(NSString*)serverURL
 ;
 +(void)postEvent:(NSString *)event_id;
 
-+(void)postEvent:(NSString *)event_id label:(NSString *)label;
+//+(void)postEvent:(NSString *)event_id label:(NSString *)label;
 
 +(void)postEvent:(NSString *)event_id acc:(NSInteger)acc;
 
-+(void)postEvent:(NSString *)event_id label:(NSString *)label acc:(NSInteger)acc;
+//+(void)postEvent:(NSString *)event_id label:(NSString *)label acc:(NSInteger)acc;
+
+//+(void)postEventJSON:(NSString*)event_id json:(NSString*)jsonStr;
 
 +(void)postTag:(NSString *)tag;
 
@@ -47,10 +49,17 @@ typedef enum {
 
 +(void)endTracPage:(NSString*)page_name;
 
++(void)tracePage:(NSString*)page_name;
+
++(void)postCID:(NSString*)clientID;
+
++(void)postUserIdentifier:(NSString*)userId;
+
 // Check if the device jail broken
 + (BOOL)isJailbroken;
 + (void)setOnLineConfig:(BOOL)isOnlineConfig;
 + (void)setIsLogEnabled:(BOOL)isLogEnabled;
 + (NSString*)getUMSUDID;
++(NSString*)getUserId;
 
 @end

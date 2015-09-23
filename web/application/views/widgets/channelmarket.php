@@ -1,33 +1,53 @@
 <section class="section_maeginstyle"  id="highchart"
-<?php if(!isset($delete)) {?>
-style="background: url(<?php echo base_url(); ?>assets/images/sidebar_shadow.png) repeat-y left top;"<?php }?>>	
+<?php
+/**
+ * Cobub Razor
+ *
+ * An open source mobile analytics system
+ *
+ * PHP versions 5
+ *
+ * @category  MobileAnalytics
+ * @package   CobubRazor
+ * @author    Cobub Team <open.cobub@gmail.com>
+ * @copyright 2011-2016 NanJing Western Bridge Co.,Ltd.
+ * @license   http://www.cobub.com/docs/en:razor:license GPL Version 3
+ * @link      http://www.cobub.com
+ * @since     Version 0.1
+ */
+if (! isset($delete)) {
+    ?>
+    style="background: url(<?php echo base_url(); ?>assets/images/sidebar_shadow.png) repeat-y left top;"<?php 
+}?>>
 	<article class="module width_full">
-	<header>
-		<div style="float:left;margin-left:2%;margin-top: 7px;">
-	<?php   if(isset($add))
-  {?>
-  <a href="#" onclick="addreport()">
-	<img src="<?php echo base_url();?>assets/images/addreport.png" title="<?php echo lang('s_suspend_title')?>" style="border:0"/></a>
-<?php }if(isset($delete)){?>
- <a href="#" onclick="deletereport()">
-	<img src="<?php echo base_url();?>assets/images/delreport.png" title="<?php echo lang('s_suspend_deltitle')?>" style="border:0"/></a>
-	<?php }?>
+		<header>
+			<div style="float: left; margin-left: 2%; margin-top: 7px;">
+	<?php
+
+if (isset($add)) {
+    ?>
+    <a href="#" onclick="addreport()"> <img
+					src="<?php echo base_url();?>assets/images/addreport.png"
+					title="<?php echo lang('s_suspend_title')?>" style="border: 0" /></a>
+    <?php 
+} if (isset($delete)) {
+    ?>
+    <a href="#" onclick="deletereport()"> <img
+					src="<?php echo base_url();?>assets/images/delreport.png"
+					title="<?php echo lang('s_suspend_deltitle')?>" style="border: 0" /></a>
+	<?php 
+}?>
 	  </div>
-	<h3 class="h3_fontstyle">		
+			<h3 class="h3_fontstyle">		
 	<?php  echo lang('v_rpt_mk_timeSegmentAnalysis') ?></h3>
 			<ul class="tabs2">
-				<li><a id='newuser'
-					href="javascript:chooseType('newuser')"><?php echo lang('t_newUsers') ?></a></li>
-				<li><a id='activeuser'
-					href="javascript:chooseType('activeuser')"><?php echo lang('t_activeUsers') ?></a></li>
-				<li><a id='session'
-					href="javascript:chooseType('sessionnum')"><?php echo lang('t_sessions') ?></a></li>
-				<li><a id='avgusage'
-					href="javascript:chooseType('avgusage')"><?php echo lang('t_averageUsageDuration') ?></a></li>
-				<li><a id='weekrate'
-					href="javascript:chooseType('weekrate')"><?php echo lang('t_activeRateWeekly') ?></a></li>
-				<li><a id='monthrate'
-					href="javascript:chooseType('monthrate')"><?php echo lang('t_activeRateMonthly') ?></a></li>			</ul>
+				<li><a id='newuser' href="javascript:chooseType('newuser')"><?php echo lang('t_newUsers') ?></a></li>
+				<li><a id='activeuser' href="javascript:chooseType('activeuser')"><?php echo lang('t_activeUsers') ?></a></li>
+				<li><a id='session' href="javascript:chooseType('sessionnum')"><?php echo lang('t_sessions') ?></a></li>
+				<li><a id='avgusage' href="javascript:chooseType('avgusage')"><?php echo lang('t_averageUsageDuration') ?></a></li>
+				<li><a id='weekrate' href="javascript:chooseType('weekrate')"><?php echo lang('t_activeRateWeekly') ?></a></li>
+				<li><a id='monthrate' href="javascript:chooseType('monthrate')"><?php echo lang('t_activeRateMonthly') ?></a></li>
+			</ul>
 		</header>
 		<div class="module_content">
 			<div id="container" class="module_content" style="height: 300px"></div>
@@ -71,7 +91,7 @@ $(document).ready(function() {
 		                type: 'spline'
 		            },
 		            title: {
-		                text: ''
+		                text: "<?php echo $reportTitle['newUser'] ?>"
 		            },
 		            subtitle: {
 		                text: '<?php echo $reportTitle['timePase']; ?>'
@@ -195,31 +215,24 @@ $(document).ready(function() {
           		}
           		for(var j=0;j<data_array.length;j++)
           	    {    
-         			     		
           			var reportData=[];    
-          			var reportTitle;      			
           		    var marketData = data_array[j];          		   
           		    var eachmarketdata = data.dataList.content[marketData];            		            		   
           		    var categories = [];
           		    for(var i=0;i<eachmarketdata.length;i++)
           		    {
-          		    	       
               		           var eachdata = eachmarketdata[i];                 		    
                 		    	 if(type=='newuser')
                    		    	{
-                		    		 reportData.push(parseFloat(eachdata.newusers,10)); 
-                		    		 reportTitle="<?php echo $reportTitle['newUser'] ?>";     
+                		    		 reportData.push(parseFloat(eachdata.newusers,10));    
                    		    	}
-
                    		    	if(type=='activeuser')
                    		    	{
                       		    	 reportData.push(parseFloat(eachdata.activeusers,10));
-                       		    	 reportTitle="<?php echo $reportTitle['activeUser'] ?>";       
                    		    	}
                    		    	if(type=='sessionnum')
                    		    	{
                       		    	 reportData.push(parseFloat(eachdata.sessions,10));  
-                       		    	reportTitle="<?php echo $reportTitle['Session'] ?>";
                    		    	}
                    		    	if(type=='avgusage')
                    		    	{
@@ -233,25 +246,17 @@ $(document).ready(function() {
                  						average = (eachdata.usingtime*1.0/eachdata.sessions)/1000;
                                 	}
                             		reportData.push(parseFloat(parseFloat(average,10).toFixed(2)));
-                            		reportTitle="<?php echo $reportTitle['avgUsageDuration'] ?>";
                    		    	}
-
                    		    	if(type=='weekrate')                       		    	
                    		    	{  
                        		    	weekrealuser = eachdata.percent*100;                    		          
                     				reportData.push(parseFloat(parseFloat(weekrealuser,10).toFixed(1)));                       			
-                   		    		reportTitle="<?php echo $reportTitle['activeWeekly'] ?>";
-                   		    		
                    		    	} 
-
                        		 	if(type=='monthrate')                       		    	
                    		    	{                           		 	
                 		       		monthrealuser =  eachdata.percent*100;                		          
-                				    reportData.push(parseFloat(parseFloat(monthrealuser,10).toFixed(1)));    
-                              	    reportTitle="<?php echo $reportTitle['activeMonthly'] ?>";
-                                	
+                				    reportData.push(parseFloat(parseFloat(monthrealuser,10).toFixed(1)));    	
                    		    	}                    		    	
-                   			
                    		    categories.push(eachdata.datevalue.substr(0,10));  
           		    }
             		category=categories;            		
@@ -275,11 +280,9 @@ $(document).ready(function() {
        				 	 tooltipdata[j]= reportData;	 
        				 	 tooltipname[j]= options.series[j].name;
            				 options.series[j].data = reportData;
-           				 options.title.text = reportTitle;
             			 options.xAxis.labels.step = parseInt(categories.length/10);
                   		 options.xAxis.categories = categories;
                    		 optionsLength=(j+1); 
-                   		     			   		         			  		   
           	    }
         		 //content markevent
          		 var marklist=data.marklist;
@@ -327,10 +330,34 @@ $(document).ready(function() {
 
     function chooseType(typename)
     {     
-        type=typename;    	
-    	myurl="<?php echo site_url();?>/report/market/getMarketData/"+type;    	
-    	renderCharts(myurl);
-    	 
+        type=typename;
+        if(type=='newuser')
+    	{
+		 options.title.text="<?php echo $reportTitle['newUser'] ?>";     
+    	}
+    	if(type=='activeuser')
+    	{
+	    	 options.title.text="<?php echo $reportTitle['activeUser'] ?>";       
+    	}
+    	if(type=='sessionnum')
+    	{
+	    	 options.title.text="<?php echo $reportTitle['Session'] ?>";
+    	}
+    	if(type=='avgusage')
+    	{
+    		options.title.text="<?php echo $reportTitle['avgUsageDuration'] ?>";
+    	}
+    	if(type=='weekrate')                       		    	
+    	{                        			
+			options.title.text="<?php echo $reportTitle['activeWeekly'] ?>";
+    	} 
+	 	if(type=='monthrate')                       		    	
+    	{                           		 	  
+	 		options.title.text="<?php echo $reportTitle['activeMonthly'] ?>";
+     	
+    	}
+    	myurl="<?php echo site_url();?>/report/market/getMarketData/"+type;
+    	renderCharts(myurl); 
     }
 </script>
 <script type="text/javascript">
@@ -367,7 +394,7 @@ function addreport()
 								 
 						},
 						error : function(XmlHttpRequest, textStatus, errorThrown) {
-							alert(<?php echo lang('t_error') 	; ?>);
+							alert(<?php echo lang('t_error'); ?>);
 						}
 					});
 		

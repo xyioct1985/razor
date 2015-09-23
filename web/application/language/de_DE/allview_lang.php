@@ -2,15 +2,17 @@
 /**
  * Cobub Razor
  *
- * An open source analytics for mobile applications
+ * An open source mobile analytics system
  *
- * @package		Cobub Razor
- * @author		WBTECH Dev Team
- * @copyright	Copyright (c) 2011 - 2012, NanJing Western Bridge Co.,Ltd.
- * @license		http://www.cobub.com/products/cobub-razor/license
- * @link		http://www.cobub.com/products/cobub-razor/
- * @since		Version 1.0
- * @filesource
+ * PHP versions 5
+ *
+ * @category  MobileAnalytics
+ * @package   CobubRazor
+ * @author    Cobub Team <open.cobub@gmail.com>
+ * @copyright 2011-2016 NanJing Western Bridge Co.,Ltd.
+ * @license   http://www.cobub.com/docs/en:razor:license GPL Version 3
+ * @link      http://www.cobub.com
+ * @since     Version 0.1
  */
 //public begin//
 
@@ -313,8 +315,10 @@ $lang['v_rpt_re_top10ProvincesActive']='Top 10 Aktive Benutzer der Provinzen';
 $lang['v_rpt_re_top10ProvincesNew']='Top 10 neue Benutzer der Provinzen';
 $lang['v_rpt_re_detailsOfNation']='Details von Nation';
 $lang['v_rpt_re_detailsOfProvince']='Details von Provinz';
+$lang['v_rpt_re_detailsOfCity']='Details of City';
 $lang['v_rpt_re_nation']='Nation';
 $lang['v_rpt_re_province']='Provinzen';
+$lang['v_rpt_re_city']='City';
 $lang['v_rpt_re_count']='zählen';
 
 
@@ -401,6 +405,7 @@ $lang['v_rpt_ol_eventNumA'] = 'Summe/Akitve Benutzer';
 $lang['v_rpt_el_eventNumS'] = 'Die Anzahl der Event Meldungen / Sitzung';
 $lang['v_rpt_ol_eventNumS'] = 'Summe/Sitzungen';
 $lang['v_rpt_el_eventIDExists'] = 'Event ID existiert bereits!';
+$lang['v_rpt_el_eventIDNameExists'] = 'Event ID or Name existiert bereits!';
 
 //view---report----Fehlerlog
 $lang['v_rpt_err_FehlerTrends']='Fehler Trends';
@@ -635,6 +640,7 @@ $lang['t_activeUsers']='Aktive Benutzer';
 $lang['t_percentOfNewUsers']='Benutzer in Prozent';
 $lang['t_newUsersP'] = "Prozent vom neuen Benutzer";
 $lang['t_sessions']='Sitzungen';
+$lang['t_sessionsP']='Benutzer in Sitzungen';
 $lang['t_averageUsageDuration']='Durchschnittliche Nutzungsdauer';
 $lang['t_accumulatedUsers']='erfasste Benutzer';
 $lang['t_accumulatedStarts']='erfasste Sitzung';
@@ -863,4 +869,10 @@ $lang["v_rpt_realtime_event_title"] = "Echtzeit events";
 
 $lang['cobub_login_ucenter']='/en/index.php?/auth';
 $lang['user_center_url']='http://dev.cobub.com/users/en/';
+
+$lang['plg_get_keysecret_home']='Sie haben nicht auf Cobub kunden - center der genehmigung der konten.Bitte registrieren sie Sich Cobub kunden - Center können MIT plug - in - funktion.
+<a href="http://www.cobub.com/users/en/index.php?/help/userkey" target="_blank">Wie der account genehmigung?</a>';
+$lang['plg_get_keysecret']='Sie haben nicht auf Cobub konto Benutzer ermächtigt, Zentrum.
+Benutzer kostenlos registrieren Cobub und zugangscode werden kann, nach dem abschluss der konten zu ermächtigen, können die Benutzer eine fülle von funktionen Cobub Zentrum.
+<a href="http://www.cobub.com/users/en/index.php?/help/userkey" target="_blank">Wie der account genehmigung?</a>Wenn sie bereits eine genehmigungscode bitte klicken';
 

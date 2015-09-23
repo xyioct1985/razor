@@ -13,7 +13,7 @@
 @implementation PostTagDao
 +(CommonReturn *)postTag:(NSString *)appkey tag:(Tag *)tag
 {
-    NSString* url = [NSString stringWithFormat:@"%@%@",[Global getBaseURL],@"/ums/postTag"];
+    NSString* url = [NSString stringWithFormat:@"%@%@",[Global getBaseURL],@"/ums/posttag"];
     
     CommonReturn *ret = [[CommonReturn alloc] init];
     NSMutableDictionary *requestDictionary = [[NSMutableDictionary alloc] init];

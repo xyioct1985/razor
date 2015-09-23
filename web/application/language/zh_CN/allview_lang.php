@@ -2,15 +2,17 @@
 /**
  * Cobub Razor
  *
- * An open source analytics for mobile applications
+ * An open source mobile analytics system
  *
- * @package		Cobub Razor
- * @author		WBTECH Dev Team
- * @copyright	Copyright (c) 2011 - 2012, NanJing Western Bridge Co.,Ltd.
- * @license		http://www.cobub.com/products/cobub-razor/license
- * @link		http://www.cobub.com/products/cobub-razor/
- * @since		Version 1.0
- * @filesource
+ * PHP versions 5
+ *
+ * @category  MobileAnalytics
+ * @package   CobubRazor
+ * @author    Cobub Team <open.cobub@gmail.com>
+ * @copyright 2011-2016 NanJing Western Bridge Co.,Ltd.
+ * @license   http://www.cobub.com/docs/en:razor:license GPL Version 3
+ * @link      http://www.cobub.com
+ * @since     Version 0.1
  */
 //public begin//
 
@@ -359,13 +361,16 @@ $lang['v_rpt_pv_visitpath']='访问路径';
 $lang['v_rpt_re_top10Nations']='Top10 国家';
 $lang['v_rpt_re_top10NationsActive']='Top10 国家活跃用户';
 $lang['v_rpt_re_top10NationsNew']='Top10 国家新增用户';
-$lang['v_rpt_re_top10Provinces']='Top10 省市';
-$lang['v_rpt_re_top10ProvincesActive']='Top10 省市活跃用户';
-$lang['v_rpt_re_top10ProvincesNew']='Top10 省市新增用户';
+$lang['v_rpt_re_top10Provinces']='Top10 省份';
+$lang['v_rpt_re_top10ProvincesActive']='Top10 省份活跃用户';
+$lang['v_rpt_re_top10ProvincesNew']='Top10 省份新增用户';
 $lang['v_rpt_re_detailsOfNation']='国家分布明细';
-$lang['v_rpt_re_detailsOfProvince']='省市分布明细';
+$lang['v_rpt_re_detailsOfProvince']='省份分布明细';
+$lang['v_rpt_re_top10City']='Top10 城市';
+$lang['v_rpt_re_detailsOfCity']='城市分布明细';
 $lang['v_rpt_re_nation']='国家';
-$lang['v_rpt_re_province']='省市';
+$lang['v_rpt_re_province']='省份';
+$lang['v_rpt_re_city']='城市';
 $lang['v_rpt_re_count']='数量';
 
 
@@ -463,6 +468,7 @@ $lang['v_rpt_ol_eventNumA'] = '金额/活跃用户';
 $lang['v_rpt_el_eventNumS'] = '事件消息数量/启动次数';
 $lang['v_rpt_ol_eventNumS'] = '金额/启动次数';
 $lang['v_rpt_el_eventIDExists'] = '事件ID已经存在！';
+$lang['v_rpt_el_eventIDNameExists'] = '事件ID或名称已经存在！';
 
 //view---report----errorlog
 $lang['v_rpt_err_errorTrends']='错误趋势';
@@ -698,6 +704,7 @@ $lang['t_activeUsers']='活跃用户';
 $lang['t_percentOfNewUsers']='新增用户比例';
 $lang['t_newUsersP'] = "新增用户比例";
 $lang['t_sessions']='启动次数';
+$lang['t_sessionsP']='启动次数比例';
 $lang['t_averageUsageDuration']='平均使用时长';
 $lang['t_accumulatedUsers']='累计用户';
 $lang['t_accumulatedStarts']='累计启动';
@@ -925,11 +932,11 @@ $lang['plg_description']=' 描述 ';
 $lang['plg_use_instruct']='集成指南';
 $lang['plg_plugin_manage']='插件管理';
 $lang['plg_get_keysecret_home']='您尚未在Cobub用户中心进行账户授权。请免费注册Cobub用户中心方可使用插件功能。
-<a href="http://dev.cobub.com/zh/userkey/" target="_blank">如何进行账户授权？</a>';
+<a href="http://www.cobub.com/users/index.php?/help/userkey" target="_blank">如何进行账户授权？</a>';
 
 $lang['plg_get_keysecret']='您尚未在Cobub用户中心进行账户授权。
 免费注册Cobub用户中心并获取授权码后即可完成账户授权，授权后即可获得Cobub用户中心提供的丰富功能。
-<a href="http://dev.cobub.com/zh/userkey/" target="_blank">如何进行账户授权？</a>如果您已经获得授权码,请点击';
+<a href="http://www.cobub.com/users/index.php?/help/userkey" target="_blank">如何进行账户授权？</a>如果您已经获得授权码,请点击';
 $lang['plg_get_account']='账户授权。';
 /******************************view report plug**************************************/
 $lang['v_cobub_user_center']='Cobub用户中心';
